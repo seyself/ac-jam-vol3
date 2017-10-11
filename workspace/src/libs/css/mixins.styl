@@ -1,0 +1,320 @@
+@import nib
+@import 'font/yakuhanjp.css'
+@import './cdn.styl'
+
+$font1 = YakuHanJP,"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック", "Yu Gothic",Meiryo UI,Meiryo,"メイリオ","ＭＳ Ｐゴシック",sans-serif
+
+fontStyle()
+  :root, html body, body *
+    font-family: $font1
+
+reset()
+  global-reset()
+  reset-html5()
+  img, button, a, a:hover
+    -webkit-tap-highlight-color: rgba(0,0,0,0)
+    -webkit-touch-callout: none
+
+  //reset-body()
+  //reset-box-model()
+  //reset-font()
+  //reset-table()
+  //reset-table-cell()
+
+  @import "sanitize.css/lib/sanitize.styl"
+
+  fontStyle()
+
+  #wrap
+    //overflow: hidden
+    margin: 0
+    padding: 0
+    width: 100%
+    min-height: 100%
+
+  // dat.GUI
+  .dg *
+    font 11px 'Lucida Grande', sans-serif
+    box-sizing content-box
+  .dg
+    .property-name
+      height: 26px
+      line-height: 26px
+    select
+      -moz-appearance: menulist
+      -webkit-appearance: menulist
+      background-color: white
+      color: black
+    .slider, .slider *
+      box-sizing border-box
+
+
+
+$pixelRatio = 2.0
+
+spriteWidth($sprite, $_pixel_ratio=$pixelRatio) {
+  width: ($sprite[4] / $_pixel_ratio);
+}
+
+spriteHeight($sprite, $_pixel_ratio=$pixelRatio) {
+  height: ($sprite[5] / $_pixel_ratio);
+}
+
+spritePosition($sprite, $_pixel_ratio=$pixelRatio) {
+  $sprite-offset-x = ($sprite[2] / $_pixel_ratio)
+  $sprite-offset-y = ($sprite[3] / $_pixel_ratio)
+  background-position: $sprite-offset-x $sprite-offset-y;
+}
+
+spriteImage($sprite) {
+  background-image: url($sprite[8]);
+}
+
+sprite($sprite, $_pixel_ratio=$pixelRatio) {
+  spriteImage($sprite)
+  spritePosition($sprite, $_pixel_ratio)
+  spriteWidth($sprite, $_pixel_ratio)
+  spriteHeight($sprite, $_pixel_ratio)
+}
+
+sprites($sprites, $_pixel_ratio=$pixelRatio) {
+  for $sprite in $sprites {
+    $sprite_name = $sprite[9];
+    .{$sprite_name} {
+      sprite($sprite, $_pixel_ratio);
+    }
+  }
+}
+
+
+size($width, $height)
+  width: $width
+  height: $height
+
+
+black-box()
+  background: #000000
+  color: #ffffff
+  font-size: 1rem
+  a
+    color: #ffffff
+  a:hover
+    opacity: 0.6
+
+table-list()
+  & > ul
+    display: table
+  & > ul > li
+    display: table-cell
+
+guide($color=red)
+  border: solid 1px $color
+
+center()
+  text-align center
+  margin 0 auto
+
+top_left($top=0, $left=0)
+  top: $top
+  left: $left
+
+top_right($top=0, $right=0)
+  top: $top
+  right: $right
+
+bottom_left($bottom=0, $left=0)
+  bottom: $bottom
+  left: $left
+
+bottom_right($bottom=0, $right=0)
+  bottom: $bottom
+  right: $right
+
+none()
+  display: none
+
+block($width=null, $height=null)
+  display: block
+  if $width != null
+    width: $width
+  if $height != null
+    width: $height
+
+inline-block($width=null, $height=null)
+  display: inline-block
+  if $width != null
+    width: $width
+  if $height != null
+    width: $height
+
+table($spacing=0)
+  display: table
+  border-collapse: separate
+  border-spacing: $spacing
+
+table-cell()
+  display: table-cell
+
+bg($color=#ffffff)
+  background-color: $color
+
+max-width($width=960px)
+  max-width: $width
+
+
+pos($top, $right, $bottom, $left)
+  if $top != null
+    top: $top
+  if $bottom != null
+    bottom: $bottom
+  if $right != null
+    right: $right
+  if $left != null
+    left: $left
+
+abs($top, $right, $bottom, $left)
+  position: absolute
+  pos($top, $right, $bottom, $left)
+
+rel($top, $right, $bottom, $left)
+  position: relative
+  pos($top, $right, $bottom, $left)
+
+
+image($url, $width, $height)
+  &:after
+    content: $url
+    display: block
+    width: $width
+    height: $height
+
+bgimage($url, $width=null, $height=null, $size=cover)
+  display: block
+  background: $url no-repeat
+  background-size: $size
+  background-position: center
+  if ($width != null)
+    width: $width
+  if ($height != null)
+    height: $height
+
+bgFit()
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center
+
+image-button-link($normal, $over, $width=null, $height=null)
+  width: $width
+  height: $height
+  text-indent: -10000px
+  -webkit-tap-highlight-color: rgba(0,0,0,0)
+  &:before,
+  &:after
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    transition: 0.3s
+    background-size: contain
+    background-repeat: no-repeat
+    background-position: center
+    -webkit-tap-highlight-color: rgba(0,0,0,0)
+
+  &:before
+    background-image: $normal
+    opacity: 1
+
+  &:after
+    background-image: $over
+    opacity: 0
+
+  @media (min-width:769px)
+    &:hover
+      &:before
+        opacity: 0
+      &:after
+        opacity: 1
+
+  @media screen and (max-width:768px)
+    &:active
+      &:before
+        opacity: 0
+      &:after
+        opacity: 1
+
+fullsize()
+  position: absolute
+  display: block
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  width: 100%
+  height: 100%
+
+spanHidden()
+  span
+    display none
+
+textReplace()
+  text-indent: -9999px
+  overflow: hidden
+  line-height: 0
+
+buttonFilter()
+  &:after
+    content: ''
+    display: block
+    width: 100%
+    height: 100%
+    background: rgba(0,0,0,0)
+    position: absolute
+    top: 0
+    left: 0
+
+marginBottom($baseMargin=20px, $pFontSize=1.5rem, $pLineHeight=1.8)
+    margin-bottom: $baseMargin - ((($pFontSize * $pLineHeight) - $pFontSize) / 2)
+
+antialias()
+  text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+assetPath($url)
+  url($cdn + $url)
+  
+
+positionAbsolute($width, $height, $top=auto, $right=auto, $bottom=auto, $left=auto)
+  width: $width
+  height: $height
+  display: block
+  position: absolute
+  top: $top
+  right: $right
+  bottom: $bottom
+  left: $left
+  text-indent: -9999px
+
+positionRelative($width, $height, $top=auto, $right=auto, $bottom=auto, $left=auto)
+  width: $width
+  height: $height
+  display: block
+  position: relative
+  top: $top
+  right: $right
+  bottom: $bottom
+  left: $left
+  text-indent: -9999px
+
+textBackground($width, $height)
+  width: $width
+  height: $height
+  text-indent: -9999px
+
+hoverAlphaEffect()
+  transition: opacity .15s linear
+  &:hover
+    opacity: .7
+    cursor: pointer

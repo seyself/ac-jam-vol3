@@ -1,0 +1,17 @@
+node_modules/
+bower_components/
+workspace/build/
+workspace/deploy/
+workspace/command/
+config/
+gulp/
+credentials/
+gulpfile.js
+karma.conf.js
+workspace/src/components/js/common/GoogleAnalytics.js
+workspace/src/pages/js/bg.js
+workspace/src/pages/data/graph.js
+workspace/src/pages/data/data.js
+workspace/src/components/js/data/_commify.js
+workspace/src/components/js/data/_createjs.js
+workspace/src/components/js/data/_datasheet.js

@@ -1,0 +1,24 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="utf8")
+    meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")
+    title Art is for everyone
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=750")
+    meta(name="format-detection", content="telephone=no")
+    meta(http-equiv="Pragma", content="no-cache")
+    meta(http-equiv="Cache-Control", content="no-cache")
+    meta(http-equiv="Expires", content="0")
+    link(rel="stylesheet", href=(file.asset("/css/entry.css")))
+  body
+    #container
+      #main
+        #entry
+          p あなたのニックネームを入力してください。
+          input.text(type='text', placeholder='ニックネーム')
+          button.send 送信
+    #landscape
+      
+    script(src=(file.asset("js/libs.js")))
+    script(src=(file.asset('/js/entry.js')))
